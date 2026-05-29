@@ -35,10 +35,11 @@ include_directories(
 #add_executable(minimal_cpp_subsrciber src/minimal_cpp_publisher.cpp)
 #ament_target_dependencies(minimal_cpp_subscriber ${dependencies})
 
-install (
-  DIRECTORY  ros2_fundamentals_examples
-  DESTINATION share/${PROJECT_NAME} 
-)
+# install (
+#  DIRECTORY  ros2_fundamentals_examples 
+#  DESTINATION share/${PROJECT_NAME} 
+#)
+
 
 install (
   DIRECTORY include/
@@ -60,7 +61,8 @@ ament_python_install_package(${PROJECT_NAME})
 install (
   PROGRAMS
   ros2_fundamentals_examples/py_minimal_publisher.py
-    ros2_fundamentals_examples/py_minimal_subscriber.py
+  ros2_fundamentals_examples/py_minimal_subscriber.py
+  ros2_fundamentals_examples/scripts/minimal_pub_sub_launch.sh
 
   DESTINATION lib/${PROJECT_NAME}
 )

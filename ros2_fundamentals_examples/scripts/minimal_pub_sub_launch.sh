@@ -1,23 +1,40 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Launch publisher and subscriber nodes with cleanup handling
+
+PUBLISHER_PID=""
+SUBSCRIBER_PID=""
+
 cleanup() {
-    echo "Restarting ROS 2 daemon before shutting down all processes..."
-    ros2 daemon stop
-    sleep
-    ros2 daemon start
-    echo "Terminating all ROS 2 realated processes..."
-    kill 0
-    exit
+    echo ""
+    echo "Stopping publisher and subscriber..."
+
+    if [ -n "$PUBLISHER_PID" ]; then
+        kill "$PUBLISHER_PID" 2>/dev/null
+    fi
+
+    if [ -n "$SUBSCRIBER_PID" ]; then
+        kill "$SUBSCRIBER_PID" 2>/dev/null
+    fi
+
+    wait "$PUBLISHER_PID" 2>/dev/null
+    wait "$SUBSCRIBER_PID" 2>/dev/null
+
+    echo "All ROS 2 processes stopped."
+    exit 0
 }
 
+trap cleanup SIGINT SIGTERM
 
-trap 'cleanup' SIGINT
+# Launch subscriber first
+ros2 run ros2_fundamentals_examples py_minimal_subscriber.py &
+SUBSCRIBER_PID=$!
 
-# Launch the publisher node 
-ros2 run ros2_fundamentals_examples py_minimal_publisher.py 
+sleep 2
 
-sleep 2 
+# Launch publisher second
+ros2 run ros2_fundamentals_examples py_minimal_publisher.py &
+PUBLISHER_PID=$!
 
-# Launch the subscriber node
-ros2 run ros2_fundamentals_examples py_minimal_subscriber.py
+# Keep script alive until Ctrl+C
+wait
