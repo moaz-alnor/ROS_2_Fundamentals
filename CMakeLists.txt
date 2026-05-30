@@ -29,8 +29,8 @@ include_directories(
   include
 )
 
-#add_executable(minimal_cpp_publisher src/minimal_cpp_publisher.cpp)
-#ament_target_dependencies(minimal_cpp_publisher ${dependencies})
+add_executable(minimal_cpp_publisher src/cpp_minimal_publisher.cpp)
+ament_target_dependencies(minimal_cpp_publisher ${dependencies})
 
 #add_executable(minimal_cpp_subsrciber src/minimal_cpp_publisher.cpp)
 #ament_target_dependencies(minimal_cpp_subscriber ${dependencies})
@@ -47,12 +47,12 @@ install (
 )
 
 # Install cpp executables
-# Install (
-#TARGETS
-#minimal_cpp_publisher
+Install (
+ TARGETS
+ minimal_cpp_publisher
 #minimal_cpp_subscriber
-# DESTINATION lib/${PROJECT_NAME}
-#)
+ DESTINATION lib/${PROJECT_NAME}
+)
 
 # Install python modules for import 
 ament_python_install_package(${PROJECT_NAME})
