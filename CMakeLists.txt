@@ -13,12 +13,6 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 
-#find_package(ament_cmake REQUIRED)
-#find_package(ament_cmake REQUIRED)
-#find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
 
 set(dependencies
   rclcpp
@@ -32,8 +26,8 @@ include_directories(
 add_executable(minimal_cpp_publisher src/cpp_minimal_publisher.cpp)
 ament_target_dependencies(minimal_cpp_publisher ${dependencies})
 
-#add_executable(minimal_cpp_subsrciber src/minimal_cpp_publisher.cpp)
-#ament_target_dependencies(minimal_cpp_subscriber ${dependencies})
+add_executable(cpp_minimal_subscriber src/cpp_minimal_subscriber.cpp)
+ament_target_dependencies(cpp_minimal_subscriber ${dependencies})
 
 # install (
 #  DIRECTORY  ros2_fundamentals_examples 
@@ -47,10 +41,10 @@ install (
 )
 
 # Install cpp executables
-Install (
+install (
  TARGETS
  minimal_cpp_publisher
-#minimal_cpp_subscriber
+ cpp_minimal_subscriber
  DESTINATION lib/${PROJECT_NAME}
 )
 
