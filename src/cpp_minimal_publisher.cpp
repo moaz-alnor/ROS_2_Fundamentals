@@ -17,6 +17,11 @@ using namespace std::chrono_literals;  //Handles time duration
 
 class MinimalCppPublisher : public rclcpp::Node
 {
+    // Grant test class access to private members to enable unit testing
+    // of timer_callback() without exposing it publicly.
+    // Friend name format: {TestSuiteName}_{TestName}_Test
+    friend class TestMinimalPublisher_TestMessageContent_Test;
+
 public:
     MinimalCppPublisher() 
       : Node("minimal_cpp_publisher"), 
@@ -55,6 +60,7 @@ private:
     rclcpp::TimerBase::SharedPtr timer_;    
 };
 
+#ifndef TESTING_EXCLUDE_MAIN
 int main(int argc, char * argv[])
 {
     rclcpp::init(argc, argv);
@@ -68,3 +74,4 @@ int main(int argc, char * argv[])
 
     return 0;
 }
+#endif
