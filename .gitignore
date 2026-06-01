@@ -1,0 +1,33 @@
+# Build & Install
+build/
+install/
+log/
+devel/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+*.so
+
+# C++
+*.o
+*.a
+*.out
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+
+# VS Code
+.vscode/
+
+# Environment
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db

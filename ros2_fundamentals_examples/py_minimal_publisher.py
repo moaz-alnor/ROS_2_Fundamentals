@@ -31,7 +31,7 @@ class MinimalPyPublisher(Node):
         """ create a custom node class for publishing messages 
         """
         # Initialize the node with a name
-        super().__init__('Minimal_Py_Publisher')
+        super().__init__('minimal_py_publisher')
 
         #create a publisher on the topic with a queue size of 10 messages
         self.publisher_1 = self.create_publisher(String, '/py_example_topic', 10)
